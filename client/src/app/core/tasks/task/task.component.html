@@ -1,0 +1,44 @@
+<form (ngSubmit)="onSubmit()">
+    <mat-form-field class="task-form-field">
+        <mat-label>New task</mat-label>
+        <input matInput [(ngModel)]="newTask.title" [ngModelOptions]="{standalone: true}" maxlength="100">
+        @if (newTask.title) {
+        <button matSuffix mat-icon-button type="submit">
+            <mat-icon>add</mat-icon>
+        </button>
+        }
+        <mat-hint align="end">{{newTask.title.length}} / 100</mat-hint>
+    </mat-form-field>
+</form>
+
+@for (task of uncheckedList; track task.id) {
+<div class="todo-item" [@openClose]>
+    <mat-checkbox (change)="onCheckboxChange($event, task)"
+        [(ngModel)]="task.checked">{{task.title}}</mat-checkbox>
+    <button mat-icon-button type="button" (click)="openDialogDelete(task)">
+        <mat-icon color="warn">delete</mat-icon>
+    </button>
+</div>
+}
+
+@if (checkedList.length > 0) {
+    <div class="checkedList" [@openClose]>
+        @if (checkedList.length === 1) {
+            <span>{{checkedList.length}} item marked</span>
+        }
+    
+        @if (checkedList.length > 1) {
+            <span>{{checkedList.length}} items marked</span>
+        }
+    
+        @for (task of checkedList; track task.id) {
+            <div class="todo-item" [@openClose]>
+                <mat-checkbox (change)="onCheckboxChange($event, task)"
+                    [(ngModel)]="task.checked">{{task.title}}</mat-checkbox>
+                <button mat-icon-button type="button" (click)="openDialogDelete(task)">
+                    <mat-icon color="warn">delete</mat-icon>
+                </button>
+            </div>
+        }
+    </div>
+}

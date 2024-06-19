@@ -36,11 +36,11 @@ export class TaskComponent implements OnInit {
   todoList: Task[];
 
   get checkedList() {
-    return this.todoList.filter(x => x.checked);
+    return this.todoList.filter(x => x.isCompleted);
   }
 
   get uncheckedList() {
-    return this.todoList.filter(x => !x.checked);
+    return this.todoList.filter(x => !x.isCompleted);
   }
 
   readonly dialog = inject(MatDialog);
@@ -72,12 +72,12 @@ export class TaskComponent implements OnInit {
   onCheckboxChange(event: MatCheckboxChange, task: Task) {
     if (event.checked) {
       this.service.checkTask(task.id).subscribe({
-        error: () => task.checked = !event.checked
+        error: () => task.isCompleted = !event.checked
       });
     }
     else {
       this.service.uncheckTask(task.id).subscribe({
-        error: () => task.checked = !event.checked
+        error: () => task.isCompleted = !event.checked
       });
     }
   }

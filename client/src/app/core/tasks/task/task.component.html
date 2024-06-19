@@ -14,7 +14,7 @@
 @for (task of uncheckedList; track task.id) {
 <div class="todo-item" [@openClose]>
     <mat-checkbox (change)="onCheckboxChange($event, task)"
-        [(ngModel)]="task.checked">{{task.title}}</mat-checkbox>
+        [(ngModel)]="task.isCompleted">{{task.title}}</mat-checkbox>
     <button mat-icon-button type="button" (click)="openDialogDelete(task)">
         <mat-icon color="warn">delete</mat-icon>
     </button>
@@ -34,7 +34,7 @@
         @for (task of checkedList; track task.id) {
             <div class="todo-item" [@openClose]>
                 <mat-checkbox (change)="onCheckboxChange($event, task)"
-                    [(ngModel)]="task.checked">{{task.title}}</mat-checkbox>
+                    [(ngModel)]="task.isCompleted">{{task.title}}</mat-checkbox>
                 <button mat-icon-button type="button" (click)="openDialogDelete(task)">
                     <mat-icon color="warn">delete</mat-icon>
                 </button>

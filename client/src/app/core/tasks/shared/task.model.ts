@@ -1,6 +1,6 @@
 export interface Task extends NewTask {
     id: number;
-    checked: boolean;
+    isCompleted: boolean;
 }
 
 export interface NewTask {
